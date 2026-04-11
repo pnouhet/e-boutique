@@ -1,0 +1,49 @@
+<?php
+
+namespace App\Form;
+
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+
+class RegistrationFormType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add('name', TextType::class, [
+                'constraints' => [new NotBlank(), new Length(min: 2, max: 255)],
+            ])
+            ->add('email', EmailType::class, [
+                'constraints' => [new NotBlank(), new Email()],
+            ])
+            ->add('plainPassword', PasswordType::class, [
+                'mapped' => false,
+                'constraints' => [new NotBlank(), new Length(min: 6, max: 4096)],
+            ])
+            ->add('address', TextType::class, [
+                'constraints' => [new NotBlank()],
+            ])
+            ->add('cp', TextType::class, [
+                'constraints' => [new NotBlank()],
+            ])
+            ->add('city', TextType::class, [
+                'constraints' => [new NotBlank()],
+            ])
+            ->add('country', TextType::class, [
+                'constraints' => [new NotBlank()],
+            ])
+        ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([]);
+    }
+}

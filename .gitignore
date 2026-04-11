@@ -1,6 +1,8 @@
 ###> symfony/framework-bundle ###
+/.claude
 /.env
 /.env.dev
+/.env.text
 /.env.local
 /.env.local.php
 /.env.*.local
