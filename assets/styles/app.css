@@ -1,5 +1,3 @@
 @import "tailwindcss";
-
-body {
-    background-color: #f8f9fa;
-}
+@source "../../templates/**/*.html.twig";
+@source "../../src/Twig/Components/**/*.php";
