@@ -1,0 +1,28 @@
+<div {{ attributes.defaults({class: 'relative'}) }}>
+    <div class="flex items-center gap-1.5 bg-gray-50 rounded-full px-3 py-1.5">
+        <svg class="w-3 h-3 text-black/35" xmlns="http://www.w3.org/2000/svg"
+             fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+        <input data-model="query"
+               type="text"
+               placeholder="Rechercher…"
+               autocomplete="off"
+               class="bg-transparent text-xs text-black/70 placeholder-black/35
+                      focus:outline-none w-28">
+    </div>
+    {% if this.results is not empty %}
+        <div class="absolute top-full mt-1 left-0 w-64 bg-white border border-gray-100
+                    rounded-xl shadow-lg z-50 py-1">
+            {% for product in this.results %}
+                <a href="{{ path('app_product', {id: product.id}) }}"
+                   class="flex items-center gap-3 px-4 py-2 hover:bg-gray-50 transition-colors">
+                    <span class="text-sm text-black/80">{{ product.name }}</span>
+                    <span class="ml-auto text-xs text-black/40">
+                        {{ product.priceHT|number_format(2, ',', ' ') }} €
+                    </span>
+                </a>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
