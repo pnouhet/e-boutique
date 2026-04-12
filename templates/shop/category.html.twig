@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ category.name }} — E-Boutique{% endblock %}
+
+{% block body %}
+<div class="mb-8">
+    <p class="text-xs text-black/35 mb-1">
+        <a href="{{ path('app_home') }}" class="hover:text-black/60 transition-colors">Accueil</a>
+        &rsaquo; <span class="text-black/60">{{ category.name }}</span>
+    </p>
+    <h1 class="text-2xl font-bold tracking-tight text-black/85">{{ category.name }}</h1>
+    {% if category.description %}
+        <p class="text-sm text-black/45 mt-1">{{ category.description }}</p>
+    {% endif %}
+</div>
+
+{% if products is empty %}
+    <p class="text-sm text-black/40">Aucun produit dans cette catégorie.</p>
+{% else %}
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        {% for product in products %}
+            <twig:ProductCard :product="product" />
+        {% endfor %}
+    </div>
+{% endif %}
+{% endblock %}

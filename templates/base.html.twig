@@ -1,27 +1,65 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}E-Boutique{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+    {% block javascripts %}
+        {% block importmap %}{{ importmap('app') }}{% endblock %}
+    {% endblock %}
+</head>
+<body class="bg-white text-black antialiased">
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
+    <nav class="border-b border-gray-100 px-8 h-14 flex items-center justify-between sticky top-0 bg-white z-40">
+        <a href="{{ path('app_home') }}"
+           class="font-bold text-lg tracking-tight text-black/90">E-Boutique</a>
 
-        {% set frankenphpHotReload = app.request.server.get('FRANKENPHP_HOT_RELOAD') %}
-        {% if frankenphpHotReload %}
-        <meta name="frankenphp-hot-reload:url" content="{{ frankenphpHotReload }}">
-        <script src="https://cdn.jsdelivr.net/npm/idiomorph"></script>
-        <script src="https://cdn.jsdelivr.net/npm/frankenphp-hot-reload/+esm" type="module"></script>
-        {% endif %}
-    </head>
-    <body>
-        <nav>
+        <div class="flex items-center gap-6">
+            {% for category in nav_categories() %}
+                <a href="{{ path('app_category', {id: category.id}) }}"
+                   class="text-sm text-black/45 hover:text-black/70 transition-colors">
+                    {{ category.name }}
+                </a>
+            {% endfor %}
+        </div>
+
+        <div class="flex items-center gap-4">
+            <twig:SearchBar />
             <twig:CartWidget />
-        </nav>
+            {% if app.user %}
+                <a href="{{ path('app_profile') }}"
+                   class="text-sm text-black/45 hover:text-black/70 transition-colors border-l border-gray-100 pl-4">
+                    {{ app.user.name }}
+                </a>
+                <a href="{{ path('app_logout') }}"
+                   class="text-sm text-black/45 hover:text-black/70 transition-colors">
+                    Déconnexion
+                </a>
+            {% else %}
+                <a href="{{ path('app_login') }}"
+                   class="text-sm text-black/45 hover:text-black/70 transition-colors border-l border-gray-100 pl-4">
+                    Connexion
+                </a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-8 py-8">
+        {% for message in app.flashes('success') %}
+            <div class="mb-4 px-4 py-3 bg-green-50 border border-green-100 rounded-xl
+                        text-sm text-green-800">{{ message }}</div>
+        {% endfor %}
+        {% for message in app.flashes('error') %}
+            <div class="mb-4 px-4 py-3 bg-red-50 border border-red-100 rounded-xl
+                        text-sm text-red-800">{{ message }}</div>
+        {% endfor %}
         {% block body %}{% endblock %}
-    </body>
+    </main>
+
+    <footer class="mt-12 py-6 border-t border-gray-100 text-center">
+        <p class="text-xs text-black/30">&copy; {{ "now"|date("Y") }} E-Boutique</p>
+    </footer>
+
+</body>
 </html>

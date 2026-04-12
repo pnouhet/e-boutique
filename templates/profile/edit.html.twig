@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+{% block title %}Modifier mon profil — E-Boutique{% endblock %}
+
+{% block body %}
+<div class="max-w-lg">
+    <h1 class="text-2xl font-bold tracking-tight text-black/85 mb-8">Modifier mon profil</h1>
+
+    {{ form_start(form, {attr: {class: 'space-y-5'}}) }}
+
+    <div>
+        {{ form_label(form.name, 'Nom', {label_attr: {class: 'block text-xs uppercase tracking-widest text-black/50 mb-1.5'}}) }}
+        {{ form_widget(form.name, {attr: {class: 'w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-black/10'}}) }}
+        {{ form_errors(form.name) }}
+    </div>
+
+    <div>
+        {{ form_label(form.email, 'E-mail', {label_attr: {class: 'block text-xs uppercase tracking-widest text-black/50 mb-1.5'}}) }}
+        {{ form_widget(form.email, {attr: {class: 'w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-black/10'}}) }}
+        {{ form_errors(form.email) }}
+    </div>
+
+    <div>
+        {{ form_label(form.plainPassword, null, {label_attr: {class: 'block text-xs uppercase tracking-widest text-black/50 mb-1.5'}}) }}
+        {{ form_widget(form.plainPassword, {attr: {class: 'w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-black/10'}}) }}
+        {{ form_errors(form.plainPassword) }}
+    </div>
+
+    <div class="border-t border-gray-100 pt-5">
+        <h2 class="text-sm font-semibold text-black/70 mb-4">Adresse de livraison</h2>
+        <div class="space-y-4">
+            <div>
+                {{ form_label(form.address, 'Adresse', {label_attr: {class: 'block text-xs uppercase tracking-widest text-black/50 mb-1.5'}}) }}
+                {{ form_widget(form.address, {attr: {class: 'w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-black/10'}}) }}
+                {{ form_errors(form.address) }}
+            </div>
+            <div class="grid grid-cols-3 gap-3">
+                <div>
+                    {{ form_label(form.cp, 'Code postal', {label_attr: {class: 'block text-xs uppercase tracking-widest text-black/50 mb-1.5'}}) }}
+                    {{ form_widget(form.cp, {attr: {class: 'w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-black/10'}}) }}
+                    {{ form_errors(form.cp) }}
+                </div>
+                <div class="col-span-2">
+                    {{ form_label(form.city, 'Ville', {label_attr: {class: 'block text-xs uppercase tracking-widest text-black/50 mb-1.5'}}) }}
+                    {{ form_widget(form.city, {attr: {class: 'w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-black/10'}}) }}
+                    {{ form_errors(form.city) }}
+                </div>
+            </div>
+            <div>
+                {{ form_label(form.country, 'Pays', {label_attr: {class: 'block text-xs uppercase tracking-widest text-black/50 mb-1.5'}}) }}
+                {{ form_widget(form.country, {attr: {class: 'w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-black/10'}}) }}
+                {{ form_errors(form.country) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="flex gap-3 pt-2">
+        <button type="submit"
+                class="bg-black text-white rounded-xl py-3 px-6 text-sm font-semibold
+                       hover:bg-black/90 transition-colors">
+            Enregistrer
+        </button>
+        <a href="{{ path('app_profile') }}"
+           class="border border-gray-200 text-black/60 rounded-xl py-3 px-6 text-sm
+                  font-semibold hover:bg-gray-50 transition-colors">
+            Annuler
+        </a>
+    </div>
+
+    {{ form_end(form) }}
+</div>
+{% endblock %}
