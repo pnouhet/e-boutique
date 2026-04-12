@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}E-Boutique{% endblock %}</title>
+    <title>{% block title %}Zone Instru{% endblock %}</title>
     {% block stylesheets %}{% endblock %}
     {% block javascripts %}
         {% block importmap %}{{ importmap('app') }}{% endblock %}
@@ -13,7 +13,7 @@
 
     <nav class="border-b border-gray-100 px-8 h-14 flex items-center justify-between sticky top-0 bg-white z-40">
         <a href="{{ path('app_home') }}"
-           class="font-bold text-lg tracking-tight text-black/90">E-Boutique</a>
+           class="font-bold text-lg tracking-tight text-black/90">Zone Instru</a>
 
         <div class="flex items-center gap-6">
             {% for category in nav_categories() %}
@@ -58,7 +58,7 @@
     </main>
 
     <footer class="mt-12 py-6 border-t border-gray-100 text-center">
-        <p class="text-xs text-black/30">&copy; {{ "now"|date("Y") }} E-Boutique</p>
+        <p class="text-xs text-black/30">&copy; {{ "now"|date("Y") }} Zone Instru - Pierre Nouhet</p>
     </footer>
 
 </body>

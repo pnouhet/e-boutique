@@ -12,20 +12,18 @@ use Symfony\Component\HttpFoundation\Response;
 #[AdminDashboard(routePath: '/admin', routeName: 'admin')]
 class DashboardController extends AbstractDashboardController
 {
-    public function __construct(private AdminUrlGenerator $adminUrlGenerator)
-    {
-    }
-
     public function index(): Response
     {
         return $this->redirect(
-            $this->adminUrlGenerator->setController(CategoryCrudController::class)->generateUrl()
+            $this->container->get(AdminUrlGenerator::class)
+                ->setController(CategoryCrudController::class)
+                ->generateUrl()
         );
     }
 
     public function configureDashboard(): Dashboard
     {
-        return Dashboard::new()->setTitle('E-Boutique Admin');
+        return Dashboard::new()->setTitle('Zone Instru Admin');
     }
 
     public function configureMenuItems(): iterable

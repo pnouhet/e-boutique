@@ -1,5 +1,6 @@
 ###> symfony/framework-bundle ###
 /.claude
+/.superpowers
 /.env
 /.env.dev
 /.env.text
