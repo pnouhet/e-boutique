@@ -2,6 +2,8 @@
 /.claude
 /.superpowers
 /docs/
+/.htaccess
+/public/.htaccess
 ###> symfony/framework-bundle ###
 /.env
 /.env.dev
